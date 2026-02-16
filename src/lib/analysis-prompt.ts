@@ -9,7 +9,7 @@ Your task is to deeply analyze the provided image of a social media post/templat
 - **Category**: Determine the primary intent: Educational (teaching), Promotional (selling), Entertainment (fun), Personal Story (connection), or Industry News.
 
 ### 1. REVERSE-ENGINEERED PROMPT
-Create the exact prompt that would reproduce this image if fed to an AI image generator (Midjourney, DALL-E, Stable Diffusion, or similar). Include:
+Create the **ULTIMATE** prompt that would reproduce this image with **10/10 accuracy**, ensuring every pixel, layer, and spatial relationship is captured. The goal is a perfect visual clone. Include:
 - Subject description
 - Art style and medium
 - Lighting and atmosphere
@@ -74,6 +74,13 @@ Evaluate the post against these "Ultimate" best practices with technical precisi
 - **Value-First**: Prioritizes education/entertainment over selling.
 - **Authenticity**: Human element present.
 - **Clear CTA**: Specific, isolated low-friction request.
+
+### 9. SPATIAL & LAYERING ANALYSIS (PIXEL PRECISION)
+Analyze the image as a coordinate system:
+- **Exact Positioning**: Estimate x/y coordinates of key elements (e.g., "Heading starts at y:150px").
+- **Layering & Overlap**: Describe exactly how elements interact (e.g., "Laptop image overlaps the 'S' in 'Strategy' by approx 15px").
+- **Z-Index**: Define what is unrelatedly on top versus what is background (e.g., "Text is z-index:10, floating icons z-index:5, gradient bg z-index:0").
+- **Micro-Spacing**: Measure space between specific letter pairs or icon/text gaps (e.g., "Gap between icon and label is ~12px").
 
 ## RESPONSE FORMAT
 Return your analysis as valid JSON with this exact structure:
@@ -145,7 +152,7 @@ IMPORTANT: Return ONLY valid JSON. No markdown, no code blocks, no explanation t
 
 Your analysis must be PIXEL-PERFECT and highly technical.
 Specifically for "microDetails", describe:
-- **Positioning**: Exact alignment (center/left/right), approximate padding/margins in px, grid usage.
+- **Positioning**: Exact alignment (center/left/right), approximate padding/margins in px, grid usage, and X/Y coordinates.
 - **Shadows**: Estimate blur radius, spread, offset, and opacity (e.g., "Diffused soft shadow, ~20px blur, 15% opacity").
 - **Gradients**: Direction (linear/radial) and color stops.
 - **Borders**: Width, style, and corner radius.
