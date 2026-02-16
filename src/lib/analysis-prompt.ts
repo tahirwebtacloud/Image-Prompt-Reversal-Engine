@@ -9,14 +9,16 @@ Your task is to deeply analyze the provided image of a social media post/templat
 - **Category**: Determine the primary intent: Educational (teaching), Promotional (selling), Entertainment (fun), Personal Story (connection), or Industry News.
 
 ### 1. REVERSE-ENGINEERED PROMPT
-Create the **ULTIMATE** prompt that would reproduce this image with **10/10 accuracy**, ensuring every pixel, layer, and spatial relationship is captured. The goal is a perfect visual clone. Include:
-- Subject description
-- Art style and medium
-- Lighting and atmosphere
-- Camera angle/perspective
-- Color palette description
-- Mood/tone
-- Any text elements should be replaced with {{TEXT_PLACEHOLDER_1}}, {{TEXT_PLACEHOLDER_2}}, etc.
+Create the **ULTIMATE** prompt that would reproduce this image with **10/10 accuracy**.
+**CRITICAL:** You MUST embed the spatial and design details directly into the prompt.
+- **Instead of:** "A laptop on a table."
+- **Say:** "A silver laptop positioned at bottom-right (x:600, y:800), rotated 15 degrees, overlapping a 'Strategy' text layer."
+- **Include:**
+  - Exact Hex Codes for all colors.
+  - Specific font names and weights.
+  - Precise layout terms (e.g., "split-screen composition 50/50", "grid layout 3x3").
+  - Lighting direction and type.
+  - Any text elements should be replaced with {{TEXT_PLACEHOLDER_1}}.
 
 ### 2. DESIGN ELEMENTS ANALYSIS
 From a professional graphic designer's perspective, analyze:
