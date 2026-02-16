@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🖼️ Post Analyzer (Gemini 3 Pro)
 
-## Getting Started
+A powerful AI-powered social media post analyzer that reverse-engineers high-performing content.
+Built with **Next.js 14**, **Gemini 3 Pro**, and **Vercel Postgres**.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🧠 Advanced AI Analysis
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Reverse-Engineered Prompt**: Generates a 10/10 accurate prompt to recreate the image.
+- **Strategic Compliance**: Evaluates posts against "Ultimate LinkedIn Guidelines" (Hook, Value, Authenticity).
+- **Pixel-Perfect Precision**: Analyzes vertical rhythm, aspect ratios (4:5/1:1), and text density.
+- **Spatial Intelligence**: Detects exact X/Y coordinates, layering, and z-index.
+- **Type & Category Detection**: Automatically classifies content (e.g., Carousel/Educational).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 📱 Android Friendly (PWA)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Installable**: "Add to Home Screen" support with robust PWA manifest.
+- **Mobile First**: Fully responsive dashboard with touch-optimized controls.
+- **Fixed Navigation**: Reliable "Hamburger" menu and sidebar for mobile users.
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 14 (App Router)
+- **AI Model**: Google Gemini 3 Pro (`@google/genai`)
+- **Database**: Vercel Postgres
+- **Auth**: NextAuth.js v5 (Google OAuth)
+- **Styling**: Tailwind CSS + Glassmorphism
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repo**:
 
-## Deploy on Vercel
+    ```bash
+    git clone https://github.com/tahirwebtacloud/Image-Prompt-Reversal-Engine.git
+    cd Post Analyzer
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+    npm install
+    # or
+    pnpm install
+    ```
+
+3. **Set up environment**:
+    Create `.env.local` with keys for `GOOGLE_GENERATIVE_AI_API_KEY`, `POSTGRES_URL`, `NEXTAUTH_SECRET`, etc.
+
+4. **Run locally**:
+
+    ```bash
+    npm run dev
+    ```
+
+## 📱 Mobile PWA Setup
+
+1. Deploy to Vercel (https` required).
+2. Open on Chrome (Android).
+3. Tap **⋮** > **Add to Home Screen**.
+
+## 📄 License
+
+MIT
