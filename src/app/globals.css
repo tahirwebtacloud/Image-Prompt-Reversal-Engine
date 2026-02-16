@@ -449,10 +449,18 @@ a:hover {
     display: flex;
   }
 
+  .mobile-close-btn {
+    display: block !important;
+  }
+
   .sidebar-overlay {
     display: block;
     pointer-events: none;
   }
+}
+
+.mobile-close-btn {
+  display: none;
 }
 
 /* Toast notification */

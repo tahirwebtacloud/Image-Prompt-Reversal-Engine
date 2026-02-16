@@ -162,9 +162,8 @@ function DashboardSidebar({
             border: "none",
             color: "var(--text-secondary)",
             cursor: "pointer",
-            display: "none", // Hidden on desktop via CSS if needed, but here dependent on layout
           }}
-          className="mobile-close-btn" // Add class if needed for specific styling
+          className="mobile-close-btn"
         >
           {/* We can rely on overlay to close, but X is nice. For now, rely on overlay + swipe? No, overlay click is standard. */}
         </button>
