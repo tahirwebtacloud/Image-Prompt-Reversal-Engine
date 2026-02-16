@@ -72,7 +72,6 @@ interface AnalysisResult {
     layoutImprovements: string[];
     overallScore: number;
     scoreReasoning: string;
-    scoreReasoning: string;
   };
   guidelineCompliance: {
     hookStrength: string;
