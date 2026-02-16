@@ -301,6 +301,7 @@ export default function AnalyzePage() {
                 display: "flex",
                 gap: "24px",
                 alignItems: "flex-start",
+                flexWrap: "wrap",
               }}
             >
               <div

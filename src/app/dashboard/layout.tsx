@@ -4,10 +4,22 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useSession, SessionProvider } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { useState, useEffect } from "react";
 
-function DashboardSidebar() {
+function DashboardSidebar({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   const pathname = usePathname();
   const { data: session } = useSession();
+
+  // Close sidebar on route change
+  useEffect(() => {
+    onClose();
+  }, [pathname, onClose]);
 
   const navItems = [
     {
@@ -71,12 +83,15 @@ function DashboardSidebar() {
   ];
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? "open" : ""}`}>
       {/* Logo */}
       <div
         style={{
           padding: "24px 20px",
           borderBottom: "1px solid var(--border)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Link
@@ -139,6 +154,20 @@ function DashboardSidebar() {
             </div>
           </div>
         </Link>
+        {/* Mobile Close Button */}
+        <button
+          onClick={onClose}
+          style={{
+            background: "none",
+            border: "none",
+            color: "var(--text-secondary)",
+            cursor: "pointer",
+            display: "none", // Hidden on desktop via CSS if needed, but here dependent on layout
+          }}
+          className="mobile-close-btn" // Add class if needed for specific styling
+        >
+          {/* We can rely on overlay to close, but X is nice. For now, rely on overlay + swipe? No, overlay click is standard. */}
+        </button>
       </div>
 
       {/* Navigation */}
@@ -243,20 +272,72 @@ function DashboardSidebar() {
   );
 }
 
-function DashboardShell({ children }: { children: React.ReactNode }) {
+function MobileHeader({ onOpen }: { onOpen: () => void }) {
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <DashboardSidebar />
-      <main
-        style={{
-          marginLeft: "280px",
-          flex: 1,
-          padding: "32px",
-          maxWidth: "calc(100vw - 280px)",
-        }}
-      >
-        {children}
-      </main>
+    <header className="mobile-header">
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <button
+          onClick={onOpen}
+          style={{
+            background: "none",
+            border: "none",
+            color: "var(--text-primary)",
+            cursor: "pointer",
+            padding: "4px",
+          }}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <span
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontWeight: "700",
+            fontSize: "18px",
+          }}
+        >
+          Post Analyzer
+        </span>
+      </div>
+    </header>
+  );
+}
+
+function DashboardShell({ children }: { children: React.ReactNode }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <MobileHeader onOpen={() => setIsSidebarOpen(true)} />
+      
+      <div style={{ display: "flex", flex: 1 }}>
+        <DashboardSidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
+        
+        {/* Overlay */}
+        <div
+          className={`sidebar-overlay ${isSidebarOpen ? "open" : ""}`}
+          onClick={() => setIsSidebarOpen(false)}
+        />
+
+        <main className="dashboard-main">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }
