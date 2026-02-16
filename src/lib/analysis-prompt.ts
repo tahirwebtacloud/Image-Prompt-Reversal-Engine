@@ -4,6 +4,10 @@ Your task is to deeply analyze the provided image of a social media post/templat
 
 ## Your Analysis Must Cover:
 
+### 0. BASIC CLASSIFICATION
+- **Post Type**: Identify if it's a Single Image, Carousel (if multiple slides visible), Video/Reel (if play button/timeline visible), Text-Only, or Infographic.
+- **Category**: Determine the primary intent: Educational (teaching), Promotional (selling), Entertainment (fun), Personal Story (connection), or Industry News.
+
 ### 1. REVERSE-ENGINEERED PROMPT
 Create the exact prompt that would reproduce this image if fed to an AI image generator (Midjourney, DALL-E, Stable Diffusion, or similar). Include:
 - Subject description
@@ -60,6 +64,8 @@ Provide specific, actionable improvements:
 ## RESPONSE FORMAT
 Return your analysis as valid JSON with this exact structure:
 {
+  "postType": "Single Image | Carousel | Video | Text-Only",
+  "category": "Educational | Promotional | Entertainment | Personal",
   "reverseEngineeredPrompt": "The full prompt with {{TEXT_PLACEHOLDER_N}} markers...",
   "designElements": {
     "layout": "...",
