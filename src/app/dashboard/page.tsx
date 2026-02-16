@@ -10,6 +10,13 @@ interface AnalysisResult {
     focalPoint: string;
     whiteSpace: string;
     balance: string;
+    microDetails?: {
+      positioning: string;
+      shadows: string;
+      gradients: string;
+      borders: string;
+      textures: string;
+    };
   };
   scrollStoppingFactors: Array<{
     factor: string;
@@ -588,39 +595,77 @@ export default function AnalyzePage() {
                 gap: "12px",
               }}
             >
-              {Object.entries(analysis.designElements).map(([key, value]) => (
-                <div
-                  key={key}
-                  style={{
-                    padding: "14px",
-                    background: "var(--bg-primary)",
-                    borderRadius: "var(--radius-sm)",
-                    border: "1px solid var(--border)",
-                  }}
-                >
+              {Object.entries(analysis.designElements).map(([key, value]) => {
+                if (key === "microDetails" && typeof value === "object") {
+                  return Object.entries(value || {}).map(([subKey, subValue]) => (
+                    <div
+                      key={subKey}
+                      style={{
+                        padding: "14px",
+                        background: "var(--bg-primary)",
+                        borderRadius: "var(--radius-sm)",
+                        border: "1px solid var(--border)",
+                        borderLeft: "3px solid var(--blue-bright)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: "600",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.05em",
+                          color: "var(--blue-bright)",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        {subKey}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "13px",
+                          color: "var(--text-secondary)",
+                          lineHeight: "1.5",
+                        }}
+                      >
+                        {subValue as string}
+                      </div>
+                    </div>
+                  ));
+                }
+                return (
                   <div
+                    key={key}
                     style={{
-                      fontSize: "11px",
-                      fontWeight: "600",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                      color: "var(--blue-bright)",
-                      marginBottom: "6px",
+                      padding: "14px",
+                      background: "var(--bg-primary)",
+                      borderRadius: "var(--radius-sm)",
+                      border: "1px solid var(--border)",
                     }}
                   >
-                    {key.replace(/([A-Z])/g, " $1").trim()}
+                    <div
+                      style={{
+                        fontSize: "11px",
+                        fontWeight: "600",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                        color: "var(--blue-bright)",
+                        marginBottom: "6px",
+                      }}
+                    >
+                      {key.replace(/([A-Z])/g, " $1").trim()}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "13px",
+                        color: "var(--text-secondary)",
+                        lineHeight: "1.5",
+                      }}
+                    >
+                      {value as string}
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: "13px",
-                      color: "var(--text-secondary)",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    {value}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

@@ -113,4 +113,28 @@ Return your analysis as valid JSON with this exact structure:
   }
 }
 
-IMPORTANT: Return ONLY valid JSON. No markdown, no code blocks, no explanation text outside the JSON.`;
+IMPORTANT: Return ONLY valid JSON. No markdown, no code blocks, no explanation text outside the JSON.
+
+Your analysis must be PIXEL-PERFECT and highly technical.
+Specifically for "microDetails", describe:
+- **Positioning**: Exact alignment (center/left/right), approximate padding/margins in px, grid usage.
+- **Shadows**: Estimate blur radius, spread, offset, and opacity (e.g., "Diffused soft shadow, ~20px blur, 15% opacity").
+- **Gradients**: Direction (linear/radial) and color stops.
+- **Borders**: Width, style, and corner radius.
+
+JSON Structure Override for designElements:
+"designElements": {
+  "layout": "...",
+  "visualHierarchy": "...",
+  "focalPoint": "...",
+  "whiteSpace": "...",
+  "balance": "...",
+  "microDetails": {
+    "positioning": "...",
+    "shadows": "...",
+    "gradients": "...",
+    "borders": "...",
+    "textures": "..."
+  }
+}
+`;
