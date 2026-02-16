@@ -3,6 +3,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 
 interface AnalysisResult {
+  postType: string;
+  category: string;
   reverseEngineeredPrompt: string;
   designElements: {
     layout: string;
@@ -522,6 +524,78 @@ export default function AnalyzePage() {
               >
                 {analysis.recommendations.scoreReasoning}
               </p>
+            </div>
+          </div>
+
+          {/* Type & Category Badges */}
+          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <div
+              className="glass-card"
+              style={{
+                padding: "12px 20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                flex: "1 1 auto",
+              }}
+            >
+              <span style={{ fontSize: "20px" }}>📑</span>
+              <div>
+                <div
+                  style={{
+                    fontSize: "11px",
+                    textTransform: "uppercase",
+                    color: "var(--text-muted)",
+                    fontWeight: "600",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  Type
+                </div>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  {analysis.postType || "Single Image"}
+                </div>
+              </div>
+            </div>
+            <div
+              className="glass-card"
+              style={{
+                padding: "12px 20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                flex: "1 1 auto",
+              }}
+            >
+              <span style={{ fontSize: "20px" }}>🏷️</span>
+              <div>
+                <div
+                  style={{
+                    fontSize: "11px",
+                    textTransform: "uppercase",
+                    color: "var(--text-muted)",
+                    fontWeight: "600",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  Category
+                </div>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  {analysis.category || "General"}
+                </div>
+              </div>
             </div>
           </div>
 

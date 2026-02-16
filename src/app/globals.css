@@ -409,8 +409,10 @@ a:hover {
   border-bottom: 1px solid var(--border);
   align-items: center;
   justify-content: space-between;
-  position: sticky;
+  position: fixed; /* Changed from sticky to fixed */
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 80;
 }
 
@@ -445,6 +447,7 @@ a:hover {
     margin-left: 0;
     max-width: 100vw;
     padding: 20px;
+    padding-top: 80px; /* 60px header + 20px spacing */
   }
 
   .mobile-header {
