@@ -276,7 +276,10 @@ function MobileHeader({ onOpen }: { onOpen: () => void }) {
     <header className="mobile-header">
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
         <button
-          onClick={onOpen}
+          onClick={() => {
+            console.log("Mobile menu clicked");
+            onOpen();
+          }}
           style={{
             background: "none",
             border: "none",
