@@ -72,6 +72,15 @@ interface AnalysisResult {
     layoutImprovements: string[];
     overallScore: number;
     scoreReasoning: string;
+    scoreReasoning: string;
+  };
+  guidelineCompliance: {
+    hookStrength: string;
+    structureReadability: string;
+    valueProposition: string;
+    authenticityFactor: string;
+    ctaEffectiveness: string;
+    visualImpact: string;
   };
 }
 
@@ -1189,6 +1198,66 @@ export default function AnalyzePage() {
             >
               💡 Recommendations
             </h3>
+
+            {/* Guideline Compliance (Strategic Analysis) */}
+            <div className="glass-card" style={{ padding: "24px" }}>
+              <h3
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  marginBottom: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                }}
+              >
+                🏆 Strategic Guideline Compliance
+              </h3>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                  gap: "12px",
+                }}
+              >
+                {Object.entries(analysis.guidelineCompliance).map(
+                  ([key, value]) => (
+                    <div
+                      key={key}
+                      style={{
+                        padding: "14px",
+                        background: "var(--bg-primary)",
+                        borderRadius: "var(--radius-sm)",
+                        border: "1px solid var(--border)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: "600",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.05em",
+                          color: "var(--blue-bright)",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        {key.replace(/([A-Z])/g, " $1").trim()}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "13px",
+                          color: "var(--text-secondary)",
+                          lineHeight: "1.5",
+                        }}
+                      >
+                        {value as string}
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
 
             {/* Recommended Color Palettes */}
             <h4

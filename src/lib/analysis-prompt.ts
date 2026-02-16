@@ -61,6 +61,15 @@ Provide specific, actionable improvements:
 - Layout improvements
 - Overall design score (1-10) with reasoning
 
+### 8. GUIDELINE COMPLIANCE (ULTIMATE LINKEDIN STRATEGY)
+Evaluate the post against these "Ultimate" best practices:
+- **Hook Mastery**: Does it stop the scroll in the first 2 lines with a question, strong statement, or failure story?
+- **Structure & Scannability**: Uses white space, short paragraphs, and lists to avoid "walls of text".
+- **Value-First**: Prioritizes education, entertainment, or inspiration over direct selling.
+- **Authenticity**: Includes personal insights or "human" elements (not generic corporate speak).
+- **Visual Excellence**: Professional, high-contrast, and relevant visuals (native video/carousel preferred if applicable).
+- **Clear CTA**: Ends with a specific, low-friction request (e.g., "Thoughts?", "Check comments").
+
 ## RESPONSE FORMAT
 Return your analysis as valid JSON with this exact structure:
 {
@@ -116,6 +125,14 @@ Return your analysis as valid JSON with this exact structure:
     "layoutImprovements": ["...", "...", "..."],
     "overallScore": 7,
     "scoreReasoning": "..."
+  },
+  "guidelineCompliance": {
+    "hookStrength": "Analysis of the first 2 lines (curiosity/value/surprise)",
+    "structureReadability": "Analysis of spacing, lists, and scannability",
+    "valueProposition": "What problem does it solve? Is it educational/inspiring?",
+    "authenticityFactor": "Does it feel human/personal or generic?",
+    "ctaEffectiveness": "Is the next step clear and compelling?",
+    "visualImpact": "Quality and relevance of the image/media"
   }
 }
 
