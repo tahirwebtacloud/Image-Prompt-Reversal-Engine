@@ -61,14 +61,19 @@ Provide specific, actionable improvements:
 - Layout improvements
 - Overall design score (1-10) with reasoning
 
-### 8. GUIDELINE COMPLIANCE (ULTIMATE LINKEDIN STRATEGY)
-Evaluate the post against these "Ultimate" best practices:
-- **Hook Mastery**: Does it stop the scroll in the first 2 lines with a question, strong statement, or failure story?
-- **Structure & Scannability**: Uses white space, short paragraphs, and lists to avoid "walls of text".
-- **Value-First**: Prioritizes education, entertainment, or inspiration over direct selling.
-- **Authenticity**: Includes personal insights or "human" elements (not generic corporate speak).
-- **Visual Excellence**: Professional, high-contrast, and relevant visuals (native video/carousel preferred if applicable).
-- **Clear CTA**: Ends with a specific, low-friction request (e.g., "Thoughts?", "Check comments").
+### 8. PIXEL-PERFECT GUIDELINE COMPLIANCE (ULTIMATE LINKEDIN STRATEGY)
+Evaluate the post against these "Ultimate" best practices with technical precision:
+- **Hook Mastery**: Does it stop the scroll in the first 2 lines? (First 20-50px of vertical height).
+- **Structure & Scannability (Px Analysis)**: 
+  - Analyze vertical rhythm: Are paragraphs separated by adequate whitespace (approx 10-20px)?
+  - Line length: Is text optimized for mobile reading (under 60 chars/line)?
+  - List usage: Are bullet points used to break up density?
+- **Visual Excellence (Dimensions)**: 
+  - Aspect Ratio: Verifiy if image is 4:5 (1080x1350px) for maximum screen real estate, or 1:1 (1080x1080px).
+  - Text-to-Image Ratio: Ensure text doesn't cover more than 20% of the image (simulated check).
+- **Value-First**: Prioritizes education/entertainment over selling.
+- **Authenticity**: Human element present.
+- **Clear CTA**: Specific, isolated low-friction request.
 
 ## RESPONSE FORMAT
 Return your analysis as valid JSON with this exact structure:
