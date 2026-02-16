@@ -415,18 +415,20 @@ a:hover {
 }
 
 .sidebar-overlay {
-  display: none;
+  display: block;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   z-index: 45;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .sidebar-overlay.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
@@ -452,11 +454,8 @@ a:hover {
   .mobile-close-btn {
     display: block !important;
   }
-
-  .sidebar-overlay {
-    display: block;
-    pointer-events: none;
-  }
+  
+  /* Overlay is handled by base class + open class now */
 }
 
 .mobile-close-btn {

@@ -282,7 +282,9 @@ function MobileHeader({ onOpen }: { onOpen: () => void }) {
             border: "none",
             color: "var(--text-primary)",
             cursor: "pointer",
-            padding: "4px",
+            padding: "12px",
+            margin: "-12px", // Negative margin to offset padding while keeping layout clean
+            zIndex: 50, // Ensure it's on top
           }}
         >
           <svg
