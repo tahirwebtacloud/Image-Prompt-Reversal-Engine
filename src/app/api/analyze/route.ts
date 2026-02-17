@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getUserByEmail, getCredential, saveAnalysis } from "@/lib/db";
 import { decryptApiKey } from "@/lib/crypto";
-import { ANALYSIS_SYSTEM_PROMPT } from "@/lib/analysis-prompt";
+import { ANALYSIS_SYSTEM_PROMPT, DEEP_ANALYSIS_SYSTEM_PROMPT } from "@/lib/analysis-prompt";
 import { logAnalysisToSheet } from "@/lib/sheets";
 import { GoogleGenAI } from "@google/genai";
 
@@ -32,7 +32,9 @@ export async function POST(request: NextRequest) {
     const apiKey = await decryptApiKey(credential.api_key_encrypted);
 
     // Parse the image from request
-    const { imageBase64, mimeType, imageName } = await request.json();
+    const { imageBase64, mimeType, imageName, mode = "standard" } = await request.json();
+
+    const systemPrompt = mode === "deep" ? DEEP_ANALYSIS_SYSTEM_PROMPT : ANALYSIS_SYSTEM_PROMPT;
 
     if (!imageBase64 || !mimeType) {
       return NextResponse.json(
@@ -54,7 +56,7 @@ export async function POST(request: NextRequest) {
           },
         },
         {
-          text: ANALYSIS_SYSTEM_PROMPT,
+          text: systemPrompt,
         },
       ],
     });

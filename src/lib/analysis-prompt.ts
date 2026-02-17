@@ -19,6 +19,7 @@ Create the **ULTIMATE** prompt that would reproduce this image with **10/10 accu
   - Precise layout terms (e.g., "split-screen composition 50/50", "grid layout 3x3").
   - Lighting direction and type.
   - Any text elements should be replaced with {{TEXT_PLACEHOLDER_1}}.
+- **Sample Prompt Generation:** You must also provide a "Sample Prompt" where all these placeholders are filled with contextually relevant, high-performing copy (e.g., if it's a LinkedIn tip post, fill placeholders with an actual tip). This sample prompt must be a ready-to-use version of the reverse-engineered prompt.
 
 ### 2. DESIGN ELEMENTS ANALYSIS
 From a professional graphic designer's perspective, analyze:
@@ -90,6 +91,7 @@ Return your analysis as valid JSON with this exact structure:
   "postType": "Single Image | Carousel | Video | Text-Only",
   "category": "Educational | Promotional | Entertainment | Personal",
   "reverseEngineeredPrompt": "The full prompt with {{TEXT_PLACEHOLDER_N}} markers...",
+  "samplePrompt": "A version of reverseEngineeredPrompt where all {{TEXT_PLACEHOLDER_N}} are replaced with high-quality, relevant example text...",
   "designElements": {
     "layout": "...",
     "visualHierarchy": "...",
@@ -174,4 +176,15 @@ JSON Structure Override for designElements:
     "textures": "..."
   }
 }
+`;
+
+export const DEEP_ANALYSIS_SYSTEM_PROMPT = `${ANALYSIS_SYSTEM_PROMPT}
+
+## DEEP ANALYSIS OVERRIDE (ROBUST MODE)
+You are now in **ROBUST PIXEL-PERFECT MODE**. Your goal is to provide a 1:1, pixel-for-pixel replica prompt.
+- **Micro-Positioning:** Every element must have an estimated X/Y coordinate and specific px dimensions.
+- **Layering Depth:** Precisely describe the stack (z-indexing) and how shadows/glows interact between layers.
+- **Texture & Material:** Describe the surface textures (e.g., "fine grain plastic", "brushed aluminum with vertical striations").
+- **Spacing:** Describe letter-spacing (kerning) and line-height (leading) in relative terms or px.
+- **Fidelity:** Your Reverse-Engineered Prompt must be so detailed that a human designer could rebuild the file in Figma without seeing the original.
 `;

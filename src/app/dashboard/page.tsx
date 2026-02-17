@@ -6,6 +6,7 @@ interface AnalysisResult {
   postType: string;
   category: string;
   reverseEngineeredPrompt: string;
+  samplePrompt?: string;
   designElements: {
     layout: string;
     visualHierarchy: string;
@@ -89,6 +90,7 @@ export default function AnalyzePage() {
   const [mimeType, setMimeType] = useState<string>("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
+  const [showSamplePrompt, setShowSamplePrompt] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -108,6 +110,7 @@ export default function AnalyzePage() {
     setMimeType(file.type);
     setError(null);
     setAnalysis(null);
+    setShowSamplePrompt(false);
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -151,7 +154,7 @@ export default function AnalyzePage() {
     [processFile]
   );
 
-  const handleAnalyze = async () => {
+  const handleAnalyze = async (mode: "standard" | "deep" = "standard") => {
     if (!imageData) return;
 
     setIsAnalyzing(true);
@@ -166,6 +169,7 @@ export default function AnalyzePage() {
           imageBase64: imageData,
           mimeType,
           imageName,
+          mode,
         }),
       });
 
@@ -356,7 +360,7 @@ export default function AnalyzePage() {
                 <div style={{ display: "flex", gap: "12px" }}>
                   <button
                     className="btn-primary animate-pulse-glow"
-                    onClick={handleAnalyze}
+                    onClick={() => handleAnalyze()}
                     disabled={isAnalyzing}
                     style={{ minWidth: "180px" }}
                   >
@@ -383,12 +387,49 @@ export default function AnalyzePage() {
                       </>
                     )}
                   </button>
+                  {analysis && (
+                    <button
+                      className="btn-secondary animate-pulse-glow"
+                      onClick={() => handleAnalyze("deep")}
+                      disabled={isAnalyzing}
+                      style={{
+                        minWidth: "180px",
+                        borderColor: "var(--blue-bright)",
+                        color: "var(--blue-bright)",
+                      }}
+                    >
+                      {isAnalyzing ? (
+                        <>
+                          <div className="spinner" style={{ width: "18px", height: "18px", borderWidth: "2px" }} />
+                          Re-Analyzing...
+                        </>
+                      ) : (
+                        <>
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                            <circle cx="12" cy="12" r="3" />
+                          </svg>
+                          Analyze Again (Robust)
+                        </>
+                      )}
+                    </button>
+                  )}
                   <button
                     className="btn-secondary"
                     onClick={() => {
                       setImageData(null);
                       setImageName("");
                       setAnalysis(null);
+                      setShowSamplePrompt(false);
                       setError(null);
                     }}
                   >
@@ -629,16 +670,88 @@ export default function AnalyzePage() {
               >
                 🎯 Reverse-Engineered Prompt
               </h3>
-              <button
-                className="btn-secondary"
-                style={{ padding: "6px 14px", fontSize: "12px" }}
-                onClick={() =>
-                  copyToClipboard(analysis.reverseEngineeredPrompt)
-                }
-              >
-                📋 Copy
-              </button>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <button
+                  className="btn-secondary"
+                  style={{
+                    padding: "6px 14px",
+                    fontSize: "12px",
+                    background: showSamplePrompt ? "var(--blue-dim)" : "transparent",
+                    borderColor: showSamplePrompt ? "var(--blue-bright)" : "var(--border)",
+                    color: showSamplePrompt ? "var(--blue-bright)" : "var(--text-secondary)",
+                  }}
+                  onClick={() => setShowSamplePrompt(!showSamplePrompt)}
+                >
+                  ✨ Generate Sample Prompt
+                </button>
+                <button
+                  className="btn-secondary"
+                  style={{ padding: "6px 14px", fontSize: "12px" }}
+                  onClick={() =>
+                    copyToClipboard(analysis.reverseEngineeredPrompt)
+                  }
+                >
+                  📋 Copy
+                </button>
+              </div>
             </div>
+
+            {showSamplePrompt && analysis.samplePrompt && (
+              <div
+                className="animate-fade-in-down"
+                style={{
+                  marginBottom: "16px",
+                  padding: "16px",
+                  background: "var(--blue-dim)",
+                  borderRadius: "var(--radius-md)",
+                  border: "1px solid var(--blue-bright)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "700",
+                      color: "var(--blue-bright)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    Sample Prompt (Filled Placeholders)
+                  </span>
+                  <button
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "var(--blue-bright)",
+                      fontSize: "11px",
+                      cursor: "pointer",
+                      fontWeight: "600",
+                    }}
+                    onClick={() => copyToClipboard(analysis.samplePrompt || "")}
+                  >
+                    Copy Sample
+                  </button>
+                </div>
+                <div
+                  style={{
+                    fontSize: "13px",
+                    lineHeight: "1.6",
+                    color: "var(--text-primary)",
+                    whiteSpace: "pre-wrap",
+                  }}
+                >
+                  {analysis.samplePrompt}
+                </div>
+              </div>
+            )}
             <div
               style={{
                 padding: "16px",
