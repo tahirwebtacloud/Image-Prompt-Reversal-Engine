@@ -139,5 +139,41 @@ Specific triggers for when to activate specialized skills.
 - **MCP (`mcp-builder`)**: Creating new MCP servers.
 - **Styling (`theme-factory`)**: Applying themes to slides/docs.
 - **Co-authoring (`doc-coauthoring`)**: Collaborative document writing workflow.
+- [ ] Check current project state (files, docs, recent commits).
+- [ ] Ask clarifying questions (one at a time, preferably multiple choice).
+- [ ] Propose 2-3 different approaches with trade-offs.
+- [ ] Present the design in small sections (200-300 words).
+- [ ] Validate each section with the user.
+- [ ] Save the validated design to `docs/plans/YYYY-MM-DD-<topic>-design.md`.
+
+## Phase 4: Execute Phase (`/gsd:execute-phase [N]`)
+
+1. **Run**: Implement the code as specified in the plans.
+2. **Commit**: Perform atomic git commits for every completed sub-task.
+3. **Verify**: Run a quick validation to ensure the code exists and basics work.
+
+**Artifacts created:** `SUMMARY.md`.
+
+## Phase 5: Verify Work (`/gsd:verify-work [N]`)
+
+1. **Extract**: List testable deliverables.
+2. **UAT**: Walk the user through each deliverable for confirmation.
+3. **Fix**: If something fails, diagnose and create fix plans for immediate re-execution.
+
+## Quick Mode (`/gsd:quick`)
+
+For small bugs or minor tweaks:
+
+1. **Plan**: Quick mental or written plan.
+2. **Execute**: Implement directly with an atomic commit.
+3. **Verify**: Brief check.
+
+## Operational Rules
+
+- **Atomic Commits**: Every meaningful unit of work MUST have its own commit.
+- **Context Preservation**: Update `STATE.md` or similar to track progress between steps.
+- **Zero Hallucination**: If details are missing, default to Phase 2 (Discuss).
+- **XML Structure**: Use structured placeholders (like those in task.md) to manage complexity.
 - **Skill Creation (`skill-creator`)**: Creating or updating agent skills.
 - **Gemini API Dev (`gemini-api-dev`)**: Use this skill when building applications with Gemini models, Gemini API, working with multimodal content, or needing current model specifications.
+- **Get Shit Done (`get-shit-done`)**: Use this skill for high-stakes, multi-phase software delivery requiring roadmap, research, and validation.
