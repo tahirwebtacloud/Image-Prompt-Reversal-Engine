@@ -41,6 +41,29 @@ export async function initializeDatabase() {
       );
     `;
 
+    // API Keys table for external access
+    await sql`
+      CREATE TABLE IF NOT EXISTS api_keys (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        name VARCHAR(255) NOT NULL,
+        hashed_key TEXT UNIQUE NOT NULL,
+        last_four VARCHAR(4) NOT NULL,
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+      );
+    `;
+
+    // API Usage/Throttling table
+    await sql`
+      CREATE TABLE IF NOT EXISTS api_usage (
+        id SERIAL PRIMARY KEY,
+        key_id INTEGER NOT NULL REFERENCES api_keys(id) ON DELETE CASCADE,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+      );
+    `;
+
     console.log("Database tables initialized successfully");
   } catch (error) {
     console.error("Failed to initialize database:", error);
@@ -136,4 +159,58 @@ export async function getAnalysisById(id: number, userId: number) {
     WHERE id = ${id} AND user_id = ${userId}
   `;
   return result.rows[0] || null;
+}
+
+// API Key Management
+export async function createApiKey(userId: number, name: string, hashedKey: string, lastFour: string) {
+  const result = await sql`
+    INSERT INTO api_keys (user_id, name, hashed_key, last_four)
+    VALUES (${userId}, ${name}, ${hashedKey}, ${lastFour})
+    RETURNING id, name, last_four, created_at
+  `;
+  return result.rows[0];
+}
+
+export async function getApiKeys(userId: number) {
+  const result = await sql`
+    SELECT id, name, last_four, created_at
+    FROM api_keys
+    WHERE user_id = ${userId}
+    ORDER BY created_at DESC
+  `;
+  return result.rows;
+}
+
+export async function revokeApiKey(id: number, userId: number) {
+  await sql`
+    DELETE FROM api_keys
+    WHERE id = ${id} AND user_id = ${userId}
+  `;
+}
+
+export async function validateApiKey(hashedKey: string) {
+  const result = await sql`
+    SELECT k.*, u.email
+    FROM api_keys k
+    JOIN users u ON k.user_id = u.id
+    WHERE k.hashed_key = ${hashedKey}
+  `;
+  return result.rows[0] || null;
+}
+
+export async function logApiUsage(keyId: number, userId: number) {
+  await sql`
+    INSERT INTO api_usage (key_id, user_id)
+    VALUES (${keyId}, ${userId})
+  `;
+}
+
+export async function getApiUsageCount(keyId: number, windowSeconds: number = 60) {
+  const result = await sql`
+    SELECT COUNT(*) as count
+    FROM api_usage
+    WHERE key_id = ${keyId}
+    AND timestamp > NOW() - ((${windowSeconds} || ' seconds')::interval)
+  `;
+  return parseInt(result.rows[0].count);
 }

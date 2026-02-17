@@ -18,8 +18,15 @@ export default function CredentialsPage() {
     text: string;
   } | null>(null);
 
+  // Public API Keys state
+  const [publicKeys, setPublicKeys] = useState<{ id: number; name: string; last_four: string; created_at: string }[]>([]);
+  const [newKeyName, setNewKeyName] = useState("");
+  const [generatedKey, setGeneratedKey] = useState<string | null>(null);
+  const [isGeneratingKey, setIsGeneratingKey] = useState(false);
+
   useEffect(() => {
     fetchStatus();
+    fetchPublicKeys();
   }, []);
 
   const fetchStatus = async () => {
@@ -31,6 +38,16 @@ export default function CredentialsPage() {
       // ignore
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchPublicKeys = async () => {
+    try {
+      const res = await fetch("/api/keys");
+      const data = await res.json();
+      if (res.ok) setPublicKeys(data.keys);
+    } catch {
+      // ignore
     }
   };
 
@@ -85,6 +102,47 @@ export default function CredentialsPage() {
       setMessage({ type: "error", text: "Failed to delete. Please try again." });
     } finally {
       setDeleting(false);
+    }
+  };
+
+  const handleGeneratePublicKey = async () => {
+    if (!newKeyName.trim()) return;
+    setIsGeneratingKey(true);
+    try {
+      const res = await fetch("/api/keys", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newKeyName.trim() }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setGeneratedKey(data.key.plainKey);
+        setNewKeyName("");
+        await fetchPublicKeys();
+      } else {
+        throw new Error(data.error);
+      }
+    } catch (err) {
+      setMessage({ type: "error", text: err instanceof Error ? err.message : "Failed to generate key" });
+    } finally {
+      setIsGeneratingKey(false);
+    }
+  };
+
+  const handleRevokePublicKey = async (id: number) => {
+    if (!confirm("Are you sure you want to revoke this API key? External apps using it will immediately lose access.")) return;
+    try {
+      const res = await fetch("/api/keys", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+        await fetchPublicKeys();
+        setMessage({ type: "success", text: "API key revoked successfully." });
+      }
+    } catch {
+      setMessage({ type: "error", text: "Failed to revoke key." });
     }
   };
 
@@ -273,6 +331,160 @@ export default function CredentialsPage() {
             </>
           )}
         </button>
+      </div>
+
+      {/* Public API Keys Section */}
+      <div style={{ marginTop: "40px", marginBottom: "32px" }}>
+        <h2
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "20px",
+            fontWeight: "700",
+            marginBottom: "8px",
+          }}
+        >
+          Public API Access
+        </h2>
+        <p style={{ color: "var(--text-secondary)", fontSize: "14px", marginBottom: "20px" }}>
+          Generate API keys to access the Post Analyzer from external applications.
+        </p>
+
+        {/* Key Generation */}
+        <div className="glass-card" style={{ padding: "24px", marginBottom: "24px", border: "1px solid var(--blue-dim)" }}>
+          <h3 style={{ fontSize: "15px", fontWeight: "600", marginBottom: "16px" }}>Generate New Key</h3>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <input
+              type="text"
+              className="input-field"
+              value={newKeyName}
+              onChange={(e) => setNewKeyName(e.target.value)}
+              placeholder="Key Name (e.g. My External App)"
+              style={{ flex: 1 }}
+            />
+            <button
+              className="btn-primary"
+              onClick={handleGeneratePublicKey}
+              disabled={isGeneratingKey || !newKeyName.trim()}
+              style={{ whiteSpace: "nowrap" }}
+            >
+              {isGeneratingKey ? "Generating..." : "Generate Key"}
+            </button>
+          </div>
+
+          {generatedKey && (
+            <div
+              style={{
+                marginTop: "20px",
+                padding: "16px",
+                background: "var(--amber-dim)",
+                border: "1px solid var(--amber-bright)",
+                borderRadius: "var(--radius-sm)",
+                color: "var(--amber-bright)",
+              }}
+            >
+              <div style={{ fontWeight: "700", marginBottom: "8px", fontSize: "14px" }}>
+                ⚠️ Copy your API key now!
+              </div>
+              <div style={{ fontSize: "13px", marginBottom: "12px" }}>
+                For security, we cannot show this key again once you leave this page.
+              </div>
+              <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                <code
+                  style={{
+                    background: "rgba(0,0,0,0.3)",
+                    padding: "8px 12px",
+                    borderRadius: "4px",
+                    flex: 1,
+                    fontFamily: "monospace",
+                    fontSize: "14px",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                  }}
+                >
+                  {generatedKey}
+                </code>
+                <button
+                  className="btn-secondary"
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedKey);
+                    setMessage({ type: "success", text: "Copied to clipboard!" });
+                  }}
+                  style={{ padding: "8px" }}
+                >
+                  Copy
+                </button>
+                <button
+                  className="btn-secondary"
+                  onClick={() => setGeneratedKey(null)}
+                  style={{ padding: "8px" }}
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Existing Keys List */}
+        <div className="glass-card" style={{ padding: "0" }}>
+          <div style={{ padding: "20px 24px", borderBottom: "1px solid var(--white-10)" }}>
+            <h3 style={{ fontSize: "15px", fontWeight: "600" }}>Active API Keys</h3>
+          </div>
+          {publicKeys.length === 0 ? (
+            <div style={{ padding: "32px", textAlign: "center", color: "var(--text-muted)", fontSize: "14px" }}>
+              No active API keys found.
+            </div>
+          ) : (
+            <div>
+              {publicKeys.map((key) => (
+                <div
+                  key={key.id}
+                  style={{
+                    padding: "16px 24px",
+                    borderBottom: "1px solid var(--white-10)",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <div style={{ fontWeight: "600", fontSize: "14px", marginBottom: "4px" }}>{key.name}</div>
+                    <div style={{ color: "var(--text-muted)", fontSize: "12px" }}>
+                      Key: <code style={{ color: "var(--blue-bright)" }}>sk_••••••••{key.last_four}</code> • Created {new Date(key.created_at).toLocaleDateString()}
+                    </div>
+                  </div>
+                  <button
+                    className="btn-link"
+                    onClick={() => handleRevokePublicKey(key.id)}
+                    style={{ color: "var(--red-bright)", fontSize: "12px", fontWeight: "500" }}
+                  >
+                    Revoke
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div style={{ marginTop: "24px", textAlign: "center" }}>
+          <a
+            href="/dashboard/docs"
+            style={{
+              color: "var(--blue-bright)",
+              fontSize: "14px",
+              fontWeight: "600",
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            View API Documentation
+          </a>
+        </div>
       </div>
 
       {/* Toast */}
