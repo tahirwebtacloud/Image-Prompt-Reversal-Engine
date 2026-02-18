@@ -19,16 +19,17 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #0A66C2, #378FE9)',
-          borderRadius: '128px',
+          background: '#0E0E0E',
+          borderRadius: '7px',
+          border: '12px solid #F9C74F',
         }}
       >
         <svg
-          width="300"
-          height="300"
+          width="320"
+          height="320"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="white"
+          stroke="#F9C74F"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"

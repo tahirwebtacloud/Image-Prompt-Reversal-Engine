@@ -196,20 +196,22 @@ export default function AnalyzePage() {
   return (
     <div className="animate-fade-in">
       {/* Header */}
-      <div style={{ marginBottom: "32px" }}>
+      <div style={{ marginBottom: "40px" }}>
         <h1
           style={{
             fontFamily: "var(--font-heading)",
-            fontSize: "28px",
-            fontWeight: "700",
-            letterSpacing: "-0.03em",
-            marginBottom: "8px",
+            fontSize: "32px",
+            fontWeight: "900",
+            letterSpacing: "-0.04em",
+            marginBottom: "12px",
+            textTransform: "uppercase",
+            color: "var(--brand-yellow)",
           }}
         >
-          Analyze Post
+          Post Analyzer
         </h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
-          Upload a social media post image to get a full design breakdown
+        <p style={{ color: "var(--text-secondary)", fontSize: "15px", fontWeight: "500" }}>
+          Advanced Multi-Modal Intelligence for Visual Design Deconstruction
         </p>
       </div>
 
@@ -248,19 +250,19 @@ export default function AnalyzePage() {
                 width: "64px",
                 height: "64px",
                 borderRadius: "16px",
-                background: "var(--blue-dim)",
+                background: "var(--primary-dim)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
               <svg
-                width="28"
-                height="28"
+                width="32"
+                height="32"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="var(--blue-bright)"
-                strokeWidth="2"
+                stroke="var(--brand-yellow)"
+                strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
@@ -394,8 +396,8 @@ export default function AnalyzePage() {
                       disabled={isAnalyzing}
                       style={{
                         minWidth: "180px",
-                        borderColor: "var(--blue-bright)",
-                        color: "var(--blue-bright)",
+                        borderColor: "var(--brand-yellow)",
+                        color: "var(--brand-yellow)",
                       }}
                     >
                       {isAnalyzing ? (
@@ -676,9 +678,9 @@ export default function AnalyzePage() {
                   style={{
                     padding: "6px 14px",
                     fontSize: "12px",
-                    background: showSamplePrompt ? "var(--blue-dim)" : "transparent",
-                    borderColor: showSamplePrompt ? "var(--blue-bright)" : "var(--border)",
-                    color: showSamplePrompt ? "var(--blue-bright)" : "var(--text-secondary)",
+                    background: showSamplePrompt ? "var(--primary-dim)" : "transparent",
+                    borderColor: showSamplePrompt ? "var(--brand-yellow)" : "var(--border)",
+                    color: showSamplePrompt ? "var(--brand-yellow)" : "var(--text-secondary)",
                   }}
                   onClick={() => setShowSamplePrompt(!showSamplePrompt)}
                 >
@@ -702,9 +704,9 @@ export default function AnalyzePage() {
                 style={{
                   marginBottom: "16px",
                   padding: "16px",
-                  background: "var(--blue-dim)",
+                  background: "var(--primary-dim)",
                   borderRadius: "var(--radius-md)",
-                  border: "1px solid var(--blue-bright)",
+                  border: "1px solid var(--brand-yellow)",
                 }}
               >
                 <div
@@ -719,7 +721,7 @@ export default function AnalyzePage() {
                     style={{
                       fontSize: "12px",
                       fontWeight: "700",
-                      color: "var(--blue-bright)",
+                      color: "var(--brand-yellow)",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -730,7 +732,7 @@ export default function AnalyzePage() {
                     style={{
                       background: "none",
                       border: "none",
-                      color: "var(--blue-bright)",
+                      color: "var(--brand-yellow)",
                       fontSize: "11px",
                       cursor: "pointer",
                       fontWeight: "600",
@@ -799,18 +801,18 @@ export default function AnalyzePage() {
                       style={{
                         padding: "14px",
                         background: "var(--bg-primary)",
-                        borderRadius: "var(--radius-sm)",
+                        borderRadius: "var(--brand-radius)",
                         border: "1px solid var(--border)",
-                        borderLeft: "3px solid var(--blue-bright)",
+                        borderLeft: "3px solid var(--brand-yellow)",
                       }}
                     >
                       <div
                         style={{
                           fontSize: "11px",
-                          fontWeight: "600",
+                          fontWeight: "700",
                           textTransform: "uppercase",
-                          letterSpacing: "0.05em",
-                          color: "var(--blue-bright)",
+                          letterSpacing: "0.08em",
+                          color: "var(--brand-yellow)",
                           marginBottom: "6px",
                         }}
                       >
@@ -844,7 +846,7 @@ export default function AnalyzePage() {
                         fontWeight: "600",
                         textTransform: "uppercase",
                         letterSpacing: "0.05em",
-                        color: "var(--blue-bright)",
+                        color: "var(--brand-yellow)",
                         marginBottom: "6px",
                       }}
                     >
@@ -961,8 +963,9 @@ export default function AnalyzePage() {
                   width: "32px",
                   height: "32px",
                   fontSize: "12px",
-                  background: "var(--blue-dim)",
-                  color: "var(--blue-bright)",
+                  background: "var(--primary-dim)",
+                  color: "var(--brand-yellow)",
+                  border: "1px solid var(--brand-yellow)",
                 }}
               >
                 {analysis.colorAnalysis.score}
@@ -1070,10 +1073,10 @@ export default function AnalyzePage() {
                 >
                   <div
                     style={{
-                      fontSize: "11px",
+                      fontSize: "10px",
                       textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                      color: "var(--blue-bright)",
+                      letterSpacing: "0.1em",
+                      color: "var(--brand-yellow)",
                       marginBottom: "6px",
                     }}
                   >
@@ -1137,11 +1140,11 @@ export default function AnalyzePage() {
                     >
                       <span
                         style={{
-                          padding: "2px 8px",
-                          background: "var(--blue-dim)",
+                          padding: "4px 10px",
+                          background: "var(--primary-dim)",
                           borderRadius: "4px",
                           fontSize: "12px",
-                          color: "var(--blue-bright)",
+                          color: "var(--brand-yellow)",
                           fontWeight: "600",
                         }}
                       >
@@ -1274,11 +1277,12 @@ export default function AnalyzePage() {
                 >
                   <span
                     style={{
-                      width: "24px",
-                      height: "24px",
+                      width: "28px",
+                      height: "28px",
                       borderRadius: "50%",
-                      background: "var(--blue-dim)",
-                      color: "var(--blue-bright)",
+                      background: "var(--primary-dim)",
+                      color: "var(--brand-yellow)",
+                      border: "1px solid var(--brand-yellow)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -1346,11 +1350,11 @@ export default function AnalyzePage() {
                     >
                       <div
                         style={{
-                          fontSize: "11px",
-                          fontWeight: "600",
+                          fontSize: "10px",
+                          fontWeight: "700",
                           textTransform: "uppercase",
-                          letterSpacing: "0.05em",
-                          color: "var(--blue-bright)",
+                          letterSpacing: "0.1em",
+                          color: "var(--brand-yellow)",
                           marginBottom: "6px",
                         }}
                       >

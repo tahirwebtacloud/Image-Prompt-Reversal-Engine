@@ -12,8 +12,7 @@ export default async function LoginPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background:
-          "radial-gradient(ellipse at 30% 20%, rgba(10, 102, 194, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(88, 166, 255, 0.08) 0%, transparent 50%), var(--bg-deep)",
+        background: "radial-gradient(circle at 10% 10%, rgba(249, 199, 79, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 90%, rgba(249, 199, 79, 0.03) 0%, transparent 40%), var(--bg-deep)",
         padding: "24px",
       }}
     >
@@ -21,32 +20,31 @@ export default async function LoginPage() {
         className="animate-fade-in-up"
         style={{
           width: "100%",
-          maxWidth: "460px",
+          maxWidth: "480px",
         }}
       >
         {/* Logo & Branding */}
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+        <div style={{ textAlign: "center", marginBottom: "48px" }}>
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "72px",
-              height: "72px",
-              borderRadius: "18px",
-              background:
-                "linear-gradient(135deg, var(--blue-primary), var(--blue-light))",
-              marginBottom: "20px",
-              boxShadow: "0 8px 32px var(--blue-glow)",
+              width: "80px",
+              height: "80px",
+              borderRadius: "7px",
+              background: "var(--brand-yellow)",
+              marginBottom: "24px",
+              boxShadow: "0 10px 40px var(--primary-glow)",
             }}
           >
             <svg
-              width="36"
-              height="36"
+              width="40"
+              height="40"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="white"
-              strokeWidth="2"
+              stroke="var(--obsidian-black)"
+              strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
@@ -58,29 +56,28 @@ export default async function LoginPage() {
           <h1
             style={{
               fontFamily: "var(--font-heading)",
-              fontSize: "32px",
-              fontWeight: "800",
-              letterSpacing: "-0.03em",
-              marginBottom: "8px",
-              background:
-                "linear-gradient(135deg, var(--text-primary), var(--blue-bright))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              fontSize: "36px",
+              fontWeight: "900",
+              letterSpacing: "-0.04em",
+              marginBottom: "12px",
+              color: "var(--brand-yellow)",
+              textTransform: "uppercase",
             }}
           >
-            Post Analyzer
+            Obsidian Analyzer
           </h1>
           <p
             style={{
               color: "var(--text-secondary)",
-              fontSize: "15px",
-              lineHeight: "1.5",
-              maxWidth: "340px",
+              fontSize: "14px",
+              fontWeight: "500",
+              lineHeight: "1.6",
+              maxWidth: "360px",
               margin: "0 auto",
+              letterSpacing: "0.01em",
             }}
           >
-            Reverse-engineer any social media post with AI-powered design
-            analysis
+            Advanced AI Intelligence for Social Media Post Deconstruction
           </p>
         </div>
 
@@ -88,8 +85,10 @@ export default async function LoginPage() {
         <div
           className="glass-card"
           style={{
-            padding: "36px",
-            marginBottom: "24px",
+            padding: "48px",
+            marginBottom: "32px",
+            border: "1px solid rgba(249, 199, 79, 0.2)",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
           }}
         >
           {/* Features List */}
@@ -97,26 +96,28 @@ export default async function LoginPage() {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "16px",
-              marginBottom: "32px",
+              gap: "20px",
+              marginBottom: "40px",
             }}
           >
             {[
               {
-                icon: "🎨",
-                text: "Reverse-engineer image prompts & design choices",
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                ),
+                text: "Reverse-engineer premium design prompts",
               },
               {
-                icon: "🔍",
-                text: "Extract colors, fonts & visual hierarchy",
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16l4-4-4-4M8 12h8"/></svg>
+                ),
+                text: "Analyze visual hierarchy & color psychology",
               },
               {
-                icon: "⚡",
-                text: "Get scroll-stopping improvement recommendations",
-              },
-              {
-                icon: "📊",
-                text: "Track your analysis history in Google Sheets",
+                icon: (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                ),
+                text: "Get scroll-stopping AI recommendations",
               },
             ].map((feature, i) => (
               <div
@@ -124,16 +125,16 @@ export default async function LoginPage() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "12px",
-                  padding: "10px 14px",
-                  background: "var(--bg-primary)",
-                  borderRadius: "var(--radius-sm)",
-                  fontSize: "13px",
+                  gap: "16px",
                   color: "var(--text-secondary)",
+                  fontSize: "14px",
+                  fontWeight: "500",
                 }}
               >
-                <span style={{ fontSize: "18px" }}>{feature.icon}</span>
-                {feature.text}
+                <div style={{ color: "var(--brand-yellow)", flexShrink: 0 }}>
+                  {feature.icon}
+                </div>
+                <span>{feature.text}</span>
               </div>
             ))}
           </div>
@@ -150,9 +151,10 @@ export default async function LoginPage() {
               className="btn-primary"
               style={{
                 width: "100%",
-                padding: "14px 24px",
+                padding: "16px 24px",
                 fontSize: "15px",
-                gap: "12px",
+                gap: "14px",
+                letterSpacing: "0.1em",
               }}
             >
               <svg
@@ -166,7 +168,7 @@ export default async function LoginPage() {
                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
-              Continue with Google
+              Google Access
             </button>
           </form>
         </div>
@@ -175,11 +177,14 @@ export default async function LoginPage() {
         <p
           style={{
             textAlign: "center",
-            fontSize: "12px",
+            fontSize: "11px",
             color: "var(--text-muted)",
+            textTransform: "uppercase",
+            letterSpacing: "0.15em",
+            fontWeight: "600",
           }}
         >
-          Powered by Gemini 3 Pro · Bring Your Own API Key
+          Obsidian Logic AI Agent System v2.0
         </p>
       </div>
     </div>

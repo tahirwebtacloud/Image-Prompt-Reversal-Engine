@@ -148,20 +148,22 @@ export default function CredentialsPage() {
 
   return (
     <div className="animate-fade-in" style={{ maxWidth: "680px" }}>
-      <div style={{ marginBottom: "32px" }}>
+      <div style={{ marginBottom: "40px" }}>
         <h1
           style={{
             fontFamily: "var(--font-heading)",
-            fontSize: "28px",
-            fontWeight: "700",
-            letterSpacing: "-0.03em",
-            marginBottom: "8px",
+            fontSize: "32px",
+            fontWeight: "900",
+            letterSpacing: "-0.04em",
+            marginBottom: "12px",
+            textTransform: "uppercase",
+            color: "var(--brand-yellow)",
           }}
         >
           Credentials
         </h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
-          Manage your Gemini API key for image analysis
+        <p style={{ color: "var(--text-secondary)", fontSize: "15px", fontWeight: "500" }}>
+          Manage your AI intelligence keys and external access
         </p>
       </div>
 
@@ -293,7 +295,7 @@ export default function CredentialsPage() {
             href="https://aistudio.google.com/apikey"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "var(--blue-bright)" }}
+            style={{ color: "var(--brand-yellow)", fontWeight: "600" }}
           >
             Google AI Studio
           </a>
@@ -350,7 +352,7 @@ export default function CredentialsPage() {
         </p>
 
         {/* Key Generation */}
-        <div className="glass-card" style={{ padding: "24px", marginBottom: "24px", border: "1px solid var(--blue-dim)" }}>
+        <div className="glass-card" style={{ padding: "24px", marginBottom: "24px", border: "1px solid var(--primary-dim)" }}>
           <h3 style={{ fontSize: "15px", fontWeight: "600", marginBottom: "16px" }}>Generate New Key</h3>
           <div style={{ display: "flex", gap: "12px" }}>
             <input
@@ -449,7 +451,7 @@ export default function CredentialsPage() {
                   <div>
                     <div style={{ fontWeight: "600", fontSize: "14px", marginBottom: "4px" }}>{key.name}</div>
                     <div style={{ color: "var(--text-muted)", fontSize: "12px" }}>
-                      Key: <code style={{ color: "var(--blue-bright)" }}>sk_••••••••{key.last_four}</code> • Created {new Date(key.created_at).toLocaleDateString()}
+                      Key: <code style={{ color: "var(--brand-yellow)", fontWeight: "700" }}>sk_••••••••{key.last_four}</code> • Created {new Date(key.created_at).toLocaleDateString()}
                     </div>
                   </div>
                   <button
@@ -469,13 +471,15 @@ export default function CredentialsPage() {
           <a
             href="/dashboard/docs"
             style={{
-              color: "var(--blue-bright)",
-              fontSize: "14px",
-              fontWeight: "600",
+              color: "var(--brand-yellow)",
+              fontSize: "13px",
+              fontWeight: "700",
               textDecoration: "none",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
               display: "inline-flex",
               alignItems: "center",
-              gap: "6px",
+              gap: "8px",
             }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

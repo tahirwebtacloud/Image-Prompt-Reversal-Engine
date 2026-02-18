@@ -41,9 +41,11 @@ console.log(result.data);`;
           style={{
             fontFamily: "var(--font-heading)",
             fontSize: "32px",
-            fontWeight: "700",
-            letterSpacing: "-0.03em",
+            fontWeight: "900",
+            letterSpacing: "-0.04em",
             marginBottom: "12px",
+            textTransform: "uppercase",
+            color: "var(--brand-yellow)",
           }}
         >
           API Documentation
@@ -59,10 +61,10 @@ console.log(result.data);`;
         <div className="glass-card" style={{ padding: "24px" }}>
           <p style={{ fontSize: "14px", color: "var(--text-secondary)", marginBottom: "16px" }}>
             The Post Analyzer API uses Bearer tokens for authentication. Generate your keys in the 
-            <a href="/dashboard/credentials" style={{ color: "var(--blue-bright)", marginLeft: "4px" }}>Credentials</a> section.
+            <a href="/dashboard/credentials" style={{ color: "var(--brand-yellow)", marginLeft: "4px", fontWeight: "600" }}>Credentials</a> section.
           </p>
           <div style={{ background: "var(--bg-primary)", padding: "16px", borderRadius: "8px", border: "1px solid var(--white-10)" }}>
-            <code style={{ fontSize: "13px", color: "var(--blue-bright)" }}>
+            <code style={{ fontSize: "13px", color: "var(--brand-yellow)", fontWeight: "700" }}>
               Authorization: Bearer sk_...
             </code>
           </div>
@@ -75,14 +77,15 @@ console.log(result.data);`;
         <div className="glass-card" style={{ padding: "24px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
             <span style={{ 
-              background: "var(--blue-bright)", 
-              color: "black", 
-              padding: "4px 8px", 
+              background: "var(--brand-yellow)", 
+              color: "var(--obsidain-black)", 
+              padding: "4px 10px", 
               borderRadius: "4px", 
-              fontSize: "12px", 
-              fontWeight: "700" 
+              fontSize: "11px", 
+              fontWeight: "800",
+              letterSpacing: "0.05em"
             }}>POST</span>
-            <code style={{ fontSize: "15px", fontWeight: "600" }}>/api/v1/analyze</code>
+            <code style={{ fontSize: "15px", fontWeight: "700", color: "var(--brand-yellow)" }}>/api/v1/analyze</code>
           </div>
           
           <p style={{ fontSize: "14px", color: "var(--text-secondary)", marginBottom: "24px" }}>
@@ -100,12 +103,12 @@ console.log(result.data);`;
             </thead>
             <tbody>
               <tr>
-                <td style={{ padding: "12px 0", color: "var(--blue-bright)" }}>imageBase64</td>
+                <td style={{ padding: "12px 0", color: "var(--brand-yellow)", fontWeight: "600" }}>imageBase64</td>
                 <td>string</td>
                 <td>Raw base64 data of the image (without data: prefix)</td>
               </tr>
               <tr>
-                <td style={{ padding: "12px 0", color: "var(--blue-bright)" }}>mimeType</td>
+                <td style={{ padding: "12px 0", color: "var(--brand-yellow)", fontWeight: "600" }}>mimeType</td>
                 <td>string</td>
                 <td>MIME type (e.g., image/png, image/jpeg)</td>
               </tr>
@@ -125,7 +128,7 @@ console.log(result.data);`;
             <button 
               className="btn-link" 
               onClick={() => copyToClipboard(curlExample, "curl")}
-              style={{ fontSize: "12px", color: copied === "curl" ? "var(--green-bright)" : "var(--blue-bright)" }}
+              style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em", color: copied === "curl" ? "var(--green)" : "var(--brand-yellow)" }}
             >
               {copied === "curl" ? "Copied!" : "Copy code"}
             </button>
@@ -141,7 +144,7 @@ console.log(result.data);`;
             <button 
               className="btn-link" 
               onClick={() => copyToClipboard(fetchExample, "fetch")}
-              style={{ fontSize: "12px", color: copied === "fetch" ? "var(--green-bright)" : "var(--blue-bright)" }}
+              style={{ fontSize: "11px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em", color: copied === "fetch" ? "var(--green)" : "var(--brand-yellow)" }}
             >
               {copied === "fetch" ? "Copied!" : "Copy code"}
             </button>

@@ -43,20 +43,22 @@ export default function HistoryPage() {
 
   return (
     <div className="animate-fade-in">
-      <div style={{ marginBottom: "32px" }}>
+      <div style={{ marginBottom: "40px" }}>
         <h1
           style={{
             fontFamily: "var(--font-heading)",
-            fontSize: "28px",
-            fontWeight: "700",
-            letterSpacing: "-0.03em",
-            marginBottom: "8px",
+            fontSize: "32px",
+            fontWeight: "900",
+            letterSpacing: "-0.04em",
+            marginBottom: "12px",
+            textTransform: "uppercase",
+            color: "var(--brand-yellow)",
           }}
         >
           Analysis History
         </h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "14px" }}>
-          Your past analyses are saved here and in your Google Sheet
+        <p style={{ color: "var(--text-secondary)", fontSize: "15px", fontWeight: "500" }}>
+          Your intelligence archive of past design deconstructions
         </p>
       </div>
 
@@ -239,11 +241,11 @@ export default function HistoryPage() {
                       <div style={{ marginBottom: "16px" }}>
                         <div
                           style={{
-                            fontSize: "11px",
+                            fontSize: "10px",
                             textTransform: "uppercase",
-                            letterSpacing: "0.05em",
-                            color: "var(--blue-bright)",
-                            fontWeight: "600",
+                            letterSpacing: "0.1em",
+                            color: "var(--brand-yellow)",
+                            fontWeight: "700",
                             marginBottom: "8px",
                           }}
                         >
@@ -270,11 +272,11 @@ export default function HistoryPage() {
                       <div>
                         <div
                           style={{
-                            fontSize: "11px",
+                            fontSize: "10px",
                             textTransform: "uppercase",
-                            letterSpacing: "0.05em",
-                            color: "var(--blue-bright)",
-                            fontWeight: "600",
+                            letterSpacing: "0.1em",
+                            color: "var(--brand-yellow)",
+                            fontWeight: "700",
                             marginBottom: "8px",
                           }}
                         >
